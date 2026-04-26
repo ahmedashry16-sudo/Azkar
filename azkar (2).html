@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أذكار الصباح والمساء</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dark: #8b6914;
+    --cream: #fdf6e3;
+    --cream-dark: #f5e6c0;
+    --brown-deep: #2c1a0e;
+    --brown: #4a2c0f;
+    --brown-mid: #7a4520;
+    --green-deep: #0d2b1a;
+    --green: #1a4a2e;
+    --green-mid: #2d6e47;
+    --green-light: #4a9e6e;
+    --text-dark: #1a0f00;
+    --shadow-gold: rgba(201,168,76,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Scheherazade New', 'Amiri', serif;
+    background: var(--green-deep);
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--cream);
+  }
+
+  /* ── Background Pattern ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(201,168,76,0.03) 40px, rgba(201,168,76,0.03) 41px),
+      repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(201,168,76,0.03) 40px, rgba(201,168,76,0.03) 41px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 100%, rgba(45,110,71,0.3) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Header ── */
+  header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 2.5rem 1rem 1.5rem;
+  }
+
+  .header-ornament {
+    color: var(--gold);
+    font-size: 2.2rem;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.5rem;
+    opacity: 0.85;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  .header-title {
+    font-family: 'Scheherazade New', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    color: var(--gold-light);
+    text-shadow: 0 0 40px rgba(201,168,76,0.5), 0 2px 4px rgba(0,0,0,0.5);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.2rem;
+  }
+
+  .header-sub {
+    font-family: 'Amiri', serif;
+    font-size: 1.05rem;
+    color: rgba(232,201,122,0.6);
+    letter-spacing: 0.15em;
+  }
+
+  .header-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.2rem;
+  }
+
+  .header-line span {
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .header-line-diamond {
+    color: var(--gold);
+    font-size: 0.7rem;
+  }
+
+  /* ── Tabs ── */
+  .tabs-wrapper {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin: 1.5rem auto 0;
+    max-width: 480px;
+    padding: 0 1rem;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 0.85rem 1.5rem;
+    font-family: 'Scheherazade New', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid rgba(201,168,76,0.4);
+    background: rgba(13,43,26,0.8);
+    color: rgba(232,201,122,0.6);
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tab-btn:first-child {
+    border-radius: 8px 0 0 8px;
+    border-left: 1px solid rgba(201,168,76,0.4);
+  }
+
+  .tab-btn:last-child {
+    border-radius: 0 8px 8px 0;
+    border-right: 1px solid rgba(201,168,76,0.4);
+  }
+
+  .tab-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.15), transparent);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+
+  .tab-btn.active {
+    background: linear-gradient(135deg, rgba(201,168,76,0.25), rgba(201,168,76,0.1));
+    color: var(--gold-light);
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(201,168,76,0.2), inset 0 1px 0 rgba(201,168,76,0.3);
+  }
+
+  .tab-btn.active::before { opacity: 1; }
+
+  .tab-btn:hover:not(.active) {
+    color: var(--gold);
+    border-color: rgba(201,168,76,0.6);
+    background: rgba(201,168,76,0.08);
+  }
+
+  .tab-icon { margin-left: 0.4rem; font-size: 1rem; }
+
+  /* ── Pages ── */
+  .page {
+    display: none;
+    position: relative;
+    z-index: 5;
+    max-width: 860px;
+    margin: 2rem auto 3rem;
+    padding: 0 1rem;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .page.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Page Title ── */
+  .page-title-wrap {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .page-title-wrap::before,
+  .page-title-wrap::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dark), var(--gold), var(--gold-dark), transparent);
+    margin: 0.6rem 0;
+  }
+
+  .page-title {
+    font-family: 'Scheherazade New', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: var(--gold-light);
+    text-shadow: 0 0 30px rgba(201,168,76,0.4);
+    padding: 0.3rem 0;
+  }
+
+  .page-title-sub {
+    font-size: 0.9rem;
+    color: rgba(232,201,122,0.5);
+    font-family: 'Amiri', serif;
+    letter-spacing: 0.1em;
+    margin-top: 0.3rem;
+  }
+
+  /* ── Zikr Card ── */
+  .zikr-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(26,74,46,0.7) 0%, rgba(13,43,26,0.9) 100%);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 16px;
+    padding: 1.6rem 1.8rem;
+    margin-bottom: 1.2rem;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    overflow: hidden;
+  }
+
+  .zikr-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle at top right, rgba(201,168,76,0.08), transparent 70%);
+    pointer-events: none;
+  }
+
+  .zikr-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle at bottom left, rgba(45,110,71,0.2), transparent 70%);
+    pointer-events: none;
+  }
+
+  .zikr-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(201,168,76,0.45);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(201,168,76,0.1);
+  }
+
+  /* ── Card Header ── */
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .card-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-dark);
+    background: rgba(201,168,76,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Scheherazade New', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .card-source {
+    font-family: 'Amiri', serif;
+    font-size: 0.82rem;
+    color: rgba(232,201,122,0.5);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 20px;
+    padding: 2px 10px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Zikr Text ── */
+  .zikr-text {
+    font-family: 'Scheherazade New', serif;
+    font-size: clamp(1.25rem, 2.5vw, 1.55rem);
+    line-height: 2.1;
+    color: var(--cream);
+    text-align: center;
+    margin-bottom: 1.2rem;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+
+  /* ── Counter ── */
+  .counter-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .counter-btn {
+    position: relative;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    border: 2px solid var(--gold-dark);
+    background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.08));
+    color: var(--gold-light);
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(201,168,76,0.2);
+    font-family: 'Scheherazade New', serif;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+
+  .counter-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.4), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .counter-btn:hover {
+    border-color: var(--gold);
+    background: linear-gradient(135deg, rgba(201,168,76,0.35), rgba(201,168,76,0.15));
+    box-shadow: 0 0 20px rgba(201,168,76,0.3), 0 4px 12px rgba(0,0,0,0.3);
+    transform: scale(1.05);
+  }
+
+  .counter-btn:active {
+    transform: scale(0.92);
+    box-shadow: 0 0 30px rgba(201,168,76,0.5), 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  .counter-btn:active::before { opacity: 1; }
+
+  .counter-btn.pulse {
+    animation: pulse-ring 0.35s ease;
+  }
+
+  @keyframes pulse-ring {
+    0%   { box-shadow: 0 0 0 0 rgba(201,168,76,0.6), 0 4px 12px rgba(0,0,0,0.3); }
+    70%  { box-shadow: 0 0 0 12px rgba(201,168,76,0), 0 4px 12px rgba(0,0,0,0.3); }
+    100% { box-shadow: 0 0 0 0 rgba(201,168,76,0), 0 4px 12px rgba(0,0,0,0.3); }
+  }
+
+  .counter-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+  }
+
+  .counter-current {
+    font-family: 'Scheherazade New', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1;
+    transition: transform 0.15s ease;
+    text-shadow: 0 0 20px rgba(201,168,76,0.4);
+  }
+
+  .counter-current.bump {
+    animation: bump 0.2s ease;
+  }
+
+  @keyframes bump {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.3); }
+    100% { transform: scale(1); }
+  }
+
+  .counter-total {
+    font-family: 'Amiri', serif;
+    font-size: 0.82rem;
+    color: rgba(232,201,122,0.45);
+    margin-top: 2px;
+  }
+
+  .counter-reset {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.2);
+    background: transparent;
+    color: rgba(232,201,122,0.3);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .counter-reset:hover {
+    border-color: rgba(201,168,76,0.5);
+    color: var(--gold);
+    background: rgba(201,168,76,0.1);
+    transform: rotate(180deg);
+  }
+
+  /* ── Progress Arc ── */
+  .progress-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .progress-svg {
+    position: absolute;
+    top: -4px; left: -4px;
+    width: calc(100% + 8px);
+    height: calc(100% + 8px);
+    transform: rotate(-90deg);
+    pointer-events: none;
+  }
+
+  .progress-circle {
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.3s ease;
+    filter: drop-shadow(0 0 4px rgba(201,168,76,0.6));
+  }
+
+  /* ── Completed Banner ── */
+  .completed-banner {
+    display: none;
+    text-align: center;
+    padding: 0.5rem;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.15), transparent);
+    border-top: 1px solid rgba(201,168,76,0.2);
+    margin-top: 0.8rem;
+    border-radius: 0 0 12px 12px;
+    font-family: 'Scheherazade New', serif;
+    font-size: 1rem;
+    color: var(--gold-light);
+    animation: fadeIn 0.4s ease;
+  }
+
+  .completed-banner.show { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ── Divider ornament ── */
+  .section-divider {
+    text-align: center;
+    color: rgba(201,168,76,0.3);
+    font-size: 1.2rem;
+    letter-spacing: 0.5rem;
+    margin: 1.5rem 0;
+  }
+
+  /* ── Reset All Button ── */
+  .reset-all-wrap {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    margin: 0.5rem auto 0;
+    max-width: 860px;
+    padding: 0 1rem;
+  }
+
+  .reset-all-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.8rem;
+    font-family: 'Scheherazade New', serif;
+    font-size: 1.1rem;
+    color: rgba(232,201,122,0.55);
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.05em;
+  }
+
+  .reset-all-btn:hover {
+    color: var(--gold-light);
+    border-color: rgba(201,168,76,0.55);
+    background: rgba(201,168,76,0.08);
+    box-shadow: 0 0 18px rgba(201,168,76,0.15);
+  }
+
+  .reset-all-btn:active { transform: scale(0.96); }
+
+  .reset-all-btn .icon {
+    font-size: 1rem;
+    display: inline-block;
+    transition: transform 0.5s ease;
+  }
+
+  .reset-all-btn:hover .icon { transform: rotate(360deg); }
+
+  /* ── Reset All Confirm Overlay ── */
+  .confirm-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+
+  .confirm-overlay.show { display: flex; animation: fadeIn 0.25s ease; }
+
+  .confirm-box {
+    background: linear-gradient(135deg, #0d2b1a, #1a4a2e);
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 20px;
+    padding: 2rem 2.5rem;
+    text-align: center;
+    max-width: 340px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(201,168,76,0.1);
+  }
+
+  .confirm-ornament {
+    color: var(--gold);
+    font-size: 1.8rem;
+    letter-spacing: 0.4rem;
+    margin-bottom: 0.8rem;
+    opacity: 0.8;
+  }
+
+  .confirm-title {
+    font-family: 'Scheherazade New', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .confirm-sub {
+    font-family: 'Amiri', serif;
+    font-size: 0.9rem;
+    color: rgba(232,201,122,0.45);
+    margin-bottom: 1.5rem;
+  }
+
+  .confirm-btns {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+  }
+
+  .confirm-yes {
+    flex: 1;
+    padding: 0.65rem 1rem;
+    font-family: 'Scheherazade New', serif;
+    font-size: 1.05rem;
+    background: linear-gradient(135deg, rgba(201,168,76,0.3), rgba(201,168,76,0.15));
+    border: 1px solid var(--gold-dark);
+    border-radius: 30px;
+    color: var(--gold-light);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .confirm-yes:hover {
+    background: linear-gradient(135deg, rgba(201,168,76,0.45), rgba(201,168,76,0.25));
+    box-shadow: 0 0 16px rgba(201,168,76,0.3);
+  }
+
+  .confirm-no {
+    flex: 1;
+    padding: 0.65rem 1rem;
+    font-family: 'Scheherazade New', serif;
+    font-size: 1.05rem;
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 30px;
+    color: rgba(232,201,122,0.45);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .confirm-no:hover {
+    border-color: rgba(201,168,76,0.4);
+    color: rgba(232,201,122,0.7);
+    background: rgba(255,255,255,0.04);
+  }
+
+  /* ── Footer ── */
+  footer {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 1.5rem 1rem 2rem;
+    color: rgba(232,201,122,0.25);
+    font-family: 'Amiri', serif;
+    font-size: 0.85rem;
+  }
+
+  .footer-ornament {
+    font-size: 1.5rem;
+    letter-spacing: 0.5rem;
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    .zikr-card { padding: 1.2rem 1rem; }
+    .counter-btn { width: 62px; height: 62px; font-size: 1.8rem; }
+    .counter-current { font-size: 2rem; }
+    .zikr-text { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-ornament">❧ ✦ ❧</div>
+  <h1 class="header-title">الأذكار اليومية</h1>
+  <p class="header-sub">حِصْنُ الْمُسْلِم</p>
+  <div class="header-line">
+    <span></span>
+    <span class="header-line-diamond">◆</span>
+    <span></span>
+  </div>
+</header>
+
+<div class="tabs-wrapper">
+  <button class="tab-btn active" onclick="showPage('sabah')">
+    <span class="tab-icon">☀</span> الصباح
+  </button>
+  <button class="tab-btn" onclick="showPage('masaa')">
+    <span class="tab-icon">🌙</span> المساء
+  </button>
+</div>
+
+<!-- ══════════ زر إعادة الكل ══════════ -->
+<div class="reset-all-wrap">
+  <button class="reset-all-btn" onclick="askResetAll()">
+    <span class="icon">↺</span>
+    إعادة جميع الأذكار
+  </button>
+</div>
+
+<!-- ══════════ نافذة التأكيد ══════════ -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <div class="confirm-ornament">❧ ✦ ❧</div>
+    <div class="confirm-title">إعادة جميع الأذكار</div>
+    <div class="confirm-sub">هل تريد إعادة ضبط كافة العدادات؟</div>
+    <div class="confirm-btns">
+      <button class="confirm-yes" onclick="confirmResetAll()">نعم، أعِد الكل</button>
+      <button class="confirm-no" onclick="closeConfirm()">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ صفحة الصباح ══════════ -->
+<div class="page active" id="page-sabah">
+  <div class="page-title-wrap">
+    <div class="page-title">أذكـار الصبـاح</div>
+    <div class="page-title-sub">تُقرأ من الفجر حتى طلوع الشمس</div>
+  </div>
+
+  <div id="sabah-cards"></div>
+</div>
+
+<!-- ══════════ صفحة المساء ══════════ -->
+<div class="page" id="page-masaa">
+  <div class="page-title-wrap">
+    <div class="page-title">أذكـار المسـاء</div>
+    <div class="page-title-sub">تُقرأ من بعد العصر حتى غروب الشمس</div>
+  </div>
+
+  <div id="masaa-cards"></div>
+</div>
+
+<footer>
+  <span class="footer-ornament">❧ ✦ ❧</span>
+  اللَّهُمَّ اجْعَلْنَا مِنَ الذَّاكِرِينَ اللَّهَ كَثِيرًا وَالذَّاكِرَاتِ
+</footer>
+
+<script>
+const sabahAzkar = [
+  { text: "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذَا الْيَوْمِ وَخَيْرَ مَا بَعْدَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذَا الْيَوْمِ وَشَرِّ مَا بَعْدَهُ، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ", count: 1, source: "مسلم" },
+  { text: "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ", count: 1, source: "الترمذي" },
+  { text: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ وَأَبُوءُ لَكَ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ", count: 1, source: "البخاري — سيد الاستغفار" },
+  { text: "اللَّهُمَّ إِنِّي أَصْبَحْتُ أُشْهِدُكَ وَأُشْهِدُ حَمَلَةَ عَرْشِكَ، وَمَلَائِكَتَكَ وَجَمِيعَ خَلْقِكَ، أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ، وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ", count: 4, source: "أبو داود" },
+  { text: "اللَّهُمَّ مَا أَصْبَحَ بِي مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ فَمِنْكَ وَحْدَكَ لَا شَرِيكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ", count: 1, source: "أبو داود" },
+  { text: "اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ", count: 3, source: "أبو داود" },
+  { text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ وَالْفَقْرِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، لَا إِلَهَ إِلَّا أَنْتَ", count: 3, source: "أبو داود" },
+  { text: "حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ", count: 7, source: "أبو داود" },
+  { text: "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ", count: 3, source: "أبو داود والترمذي" },
+  { text: "رَضِيتُ بِاللَّهِ رَبًّا وَبِالْإِسْلَامِ دِينًا وَبِمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا", count: 3, source: "أبو داود والترمذي" },
+  { text: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ", count: 100, source: "مسلم" },
+  { text: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ", count: 10, source: "الترمذي والنسائي" },
+  { text: "اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ", count: 10, source: "الطبراني" },
+  { text: "آيَةُ الْكُرْسِيِّ ﴿اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ...﴾", count: 1, source: "البخاري" },
+  { text: "﴿قُلْ هُوَ اللَّهُ أَحَدٌ﴾ وَ﴿قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ﴾ وَ﴿قُلْ أَعُوذُ بِرَبِّ النَّاسِ﴾", count: 3, source: "أبو داود والترمذي" },
+  { text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ", count: 1, source: "ابن ماجه" },
+  { text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي", count: 1, source: "أبو داود" },
+];
+
+const masaaAzkar = [
+  { text: "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذِهِ اللَّيْلَةِ وَخَيْرَ مَا بَعْدَهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذِهِ اللَّيْلَةِ وَشَرِّ مَا بَعْدَهَا، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ", count: 1, source: "مسلم" },
+  { text: "اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ وَإِلَيْكَ الْمَصِيرُ", count: 1, source: "الترمذي" },
+  { text: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ وَأَبُوءُ لَكَ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ", count: 1, source: "البخاري — سيد الاستغفار" },
+  { text: "اللَّهُمَّ إِنِّي أَمْسَيْتُ أُشْهِدُكَ وَأُشْهِدُ حَمَلَةَ عَرْشِكَ، وَمَلَائِكَتَكَ وَجَمِيعَ خَلْقِكَ، أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ، وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ", count: 4, source: "أبو داود" },
+  { text: "اللَّهُمَّ مَا أَمْسَى بِي مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ فَمِنْكَ وَحْدَكَ لَا شَرِيكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ", count: 1, source: "أبو داود" },
+  { text: "اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ", count: 3, source: "أبو داود" },
+  { text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ وَالْفَقْرِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، لَا إِلَهَ إِلَّا أَنْتَ", count: 3, source: "أبو داود" },
+  { text: "حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ", count: 7, source: "أبو داود" },
+  { text: "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ", count: 3, source: "أبو داود والترمذي" },
+  { text: "رَضِيتُ بِاللَّهِ رَبًّا وَبِالْإِسْلَامِ دِينًا وَبِمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا", count: 3, source: "أبو داود والترمذي" },
+  { text: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ", count: 100, source: "مسلم" },
+  { text: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ", count: 10, source: "الترمذي والنسائي" },
+  { text: "اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ", count: 10, source: "الطبراني" },
+  { text: "آيَةُ الْكُرْسِيِّ ﴿اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ...﴾", count: 1, source: "البخاري" },
+  { text: "﴿قُلْ هُوَ اللَّهُ أَحَدٌ﴾ وَ﴿قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ﴾ وَ﴿قُلْ أَعُوذُ بِرَبِّ النَّاسِ﴾", count: 3, source: "أبو داود والترمذي" },
+  { text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ", count: 1, source: "ابن ماجه" },
+  { text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ مَا عَمِلْتُ، وَمِنْ شَرِّ مَا لَمْ أَعْمَلْ", count: 1, source: "مسلم" },
+  { text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي", count: 1, source: "أبو داود" },
+];
+
+// Arabic numerals
+const toArabic = n => n.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+
+// Build cards
+function buildCards(data, containerId, prefix) {
+  const container = document.getElementById(containerId);
+  const nums = ['١','٢','٣','٤','٥','٦','٧','٨','٩','١٠','١١','١٢','١٣','١٤','١٥','١٦','١٧','١٨'];
+  container.innerHTML = data.map((z, i) => {
+    const id = `${prefix}_${i}`;
+    const circumference = 2 * Math.PI * 26;
+    const countLabel = z.count === 1 ? 'مرة واحدة' : `${toArabic(z.count)} مرات`;
+    return `
+    <div class="zikr-card" id="card_${id}">
+      <div class="card-header">
+        <div class="card-num">${nums[i] || toArabic(i+1)}</div>
+        <div class="card-source">${z.source}</div>
+      </div>
+      <div class="zikr-text">${z.text}</div>
+      <div class="counter-wrap">
+        <button class="counter-reset" onclick="resetCounter('${id}', ${z.count})" title="إعادة">↺</button>
+        <div class="counter-display">
+          <div class="counter-current" id="cur_${id}">٠</div>
+          <div class="counter-total">من ${countLabel}</div>
+        </div>
+        <div class="progress-wrap">
+          <button class="counter-btn" id="btn_${id}" onclick="increment('${id}', ${z.count})">
+            <svg class="progress-svg" viewBox="0 0 64 64">
+              <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(201,168,76,0.15)" stroke-width="2.5"/>
+              <circle class="progress-circle" id="prog_${id}" cx="32" cy="32" r="26"
+                stroke-dasharray="${circumference}"
+                stroke-dashoffset="${circumference}"/>
+            </svg>
+            ✦
+          </button>
+        </div>
+      </div>
+      <div class="completed-banner" id="done_${id}">
+        ✦ تَمَّ بِحَمْدِ اللَّهِ ✦
+      </div>
+    </div>`;
+  }).join('');
+}
+
+buildCards(sabahAzkar, 'sabah-cards', 'sabah');
+buildCards(masaaAzkar, 'masaa-cards', 'masaa');
+
+// State
+const state = {};
+
+function increment(id, total) {
+  if (!state[id]) state[id] = 0;
+  if (state[id] >= total) return;
+
+  state[id]++;
+  const cur = state[id];
+
+  // Update display
+  const curEl = document.getElementById(`cur_${id}`);
+  curEl.textContent = toArabic(cur);
+  curEl.classList.remove('bump');
+  void curEl.offsetWidth;
+  curEl.classList.add('bump');
+
+  // Pulse button
+  const btn = document.getElementById(`btn_${id}`);
+  btn.classList.remove('pulse');
+  void btn.offsetWidth;
+  btn.classList.add('pulse');
+
+  // Update progress arc
+  const prog = document.getElementById(`prog_${id}`);
+  const circumference = 2 * Math.PI * 26;
+  const offset = circumference * (1 - cur / total);
+  prog.style.strokeDashoffset = offset;
+
+  // Completion
+  if (cur >= total) {
+    document.getElementById(`done_${id}`).classList.add('show');
+    prog.style.stroke = '#e8c97a';
+    btn.style.background = 'linear-gradient(135deg, rgba(201,168,76,0.4), rgba(201,168,76,0.2))';
+    btn.style.borderColor = 'var(--gold-light)';
+  }
+}
+
+function resetCounter(id, total) {
+  state[id] = 0;
+  document.getElementById(`cur_${id}`).textContent = '٠';
+  const circumference = 2 * Math.PI * 26;
+  document.getElementById(`prog_${id}`).style.strokeDashoffset = circumference;
+  document.getElementById(`prog_${id}`).style.stroke = 'var(--gold)';
+  document.getElementById(`done_${id}`).classList.remove('show');
+  const btn = document.getElementById(`btn_${id}`);
+  btn.style.background = '';
+  btn.style.borderColor = '';
+}
+
+function askResetAll() {
+  document.getElementById('confirmOverlay').classList.add('show');
+}
+
+function closeConfirm() {
+  document.getElementById('confirmOverlay').classList.remove('show');
+}
+
+function confirmResetAll() {
+  const allPrefixes = [
+    ...sabahAzkar.map((_, i) => `sabah_${i}`),
+    ...masaaAzkar.map((_, i) => `masaa_${i}`)
+  ];
+  allPrefixes.forEach(id => {
+    const totalEl = document.getElementById(`cur_${id}`);
+    if (!totalEl) return;
+    state[id] = 0;
+    totalEl.textContent = '٠';
+    const circumference = 2 * Math.PI * 26;
+    const prog = document.getElementById(`prog_${id}`);
+    if (prog) { prog.style.strokeDashoffset = circumference; prog.style.stroke = 'var(--gold)'; }
+    const done = document.getElementById(`done_${id}`);
+    if (done) done.classList.remove('show');
+    const btn = document.getElementById(`btn_${id}`);
+    if (btn) { btn.style.background = ''; btn.style.borderColor = ''; }
+  });
+  closeConfirm();
+}
+
+// Close overlay on backdrop click
+document.getElementById('confirmOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeConfirm();
+});
+
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`page-${page}`).classList.add('active');
+  event.target.closest('.tab-btn').classList.add('active');
+}
+</script>
+</body>
+</html>
