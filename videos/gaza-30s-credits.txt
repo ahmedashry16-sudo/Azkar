@@ -1,0 +1,10 @@
+Gaza — 30s documentary (Arabic). Photo credits (Wikimedia Commons):
+
+- المسجد العمري الكبير في غزة بعد القصف والدمار.jpg — Hla.bashbash — CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:%D8%A7%D9%84%D9%85%D8%B3%D8%AC%D8%AF_%D8%A7%D9%84%D8%B9%D9%85%D8%B1%D9%8A_%D8%A7%D9%84%D9%83%D8%A8%D9%8A%D8%B1_%D9%81%D9%8A_%D8%BA%D8%B2%D8%A9_%D8%A8%D8%B9%D8%AF_%D8%A7%D9%84%D9%82%D8%B5%D9%81_%D9%88%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D8%B1.jpg
+- Two young boys walk under a collapsed minaret in destroyed Gaza.jpg — Shareef Sarhan — CC BY-SA 3.0 igo — https://commons.wikimedia.org/wiki/File:Two_young_boys_walk_under_a_collapsed_minaret_in_destroyed_Gaza.jpg
+- An aerial view of Al-Mawasi area where displaced Palestinians live in tents, Gaza Strip.jpg — Ashraf Amra — CC BY-SA 3.0 igo — https://commons.wikimedia.org/wiki/File:An_aerial_view_of_Al-Mawasi_area_where_displaced_Palestinians_live_in_tents,_Gaza_Strip.jpg
+- Flooded tents of displaced Palestinians due to heavy rain in Deir el-Balah, Gaza Strip.jpg — Ashraf Amra — CC BY-SA 3.0 igo — https://commons.wikimedia.org/wiki/File:Flooded_tents_of_displaced_Palestinians_due_to_heavy_rain_in_Deir_el-Balah,_Gaza_Strip.jpg
+- Boys salvaging a destroyed building in the Gaza Strip.jpg — Shareef Sarhan — CC BY-SA 3.0 igo — https://commons.wikimedia.org/wiki/File:Boys_salvaging_a_destroyed_building_in_the_Gaza_Strip.jpg
+
+Narration: Piper TTS (ar_JO-kareem). Music: synthesized ambient drone. Built with OpenMontage.
+Displacement figure (over 90%): UN OCHA / UNRWA estimates.
